@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataTables Generator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>DataTables Generator</h2>
+    
+    <div class="section">
+        <h3>Server and Database</h3>
+        <label>Table name:</label> <input type="text" id="tableName" value="aaaa" oninput="generateCode()">
+        <br>
+        <label>Primary key:</label> <input type="text" id="primaryKey" value="id" oninput="generateCode()">
+    </div>
+    
+    <div class="section">
+        <h3>Form / Table</h3>
+        <div id="fields">
+            <div>Field 1: <input type="text" value="t" oninput="generateCode()"> 
+                <select onchange="generateCode()">
+                    <option>Text</option>
+                    <option>Number</option>
+                    <option>Password</option>
+                    <option>Textarea</option>
+                    <option>Select</option>
+                    <option>Checkbox</option>
+                    <option>Radio</option>
+                    <option>Date</option>
+                    <option>Time</option>
+                    <option>DateTime</option>
+                    <option>Read only</option>
+                    <option>Hidden</option>
+                </select> 
+                <button onclick="removeField(this)">Remove</button>
+            </div>
+        </div>
+        <button onclick="addField()">Add Field</button>
+    </div>
+    
+    <div class="section">
+        <h3>Code View</h3>
+        <button onclick="viewCodeInNewPage('SQL')">SQL</button> 
+        <button onclick="viewCodeInNewPage('HTML')">HTML</button> 
+        <button onclick="viewCodeInNewPage('Javascript')">Javascript</button> 
+        <button onclick="viewCodeInNewPage('PHP')">PHP</button>
+        <pre id="codeOutput">Select an option to view the generated code.</pre>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
