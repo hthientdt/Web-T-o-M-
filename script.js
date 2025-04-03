@@ -154,10 +154,7 @@ Field::inst( "time" )
     ->validator( Validate::dateFormat( "H:i" ) )
     ->getFormatter( Format::datetime( "H:i:s", "H:i" ) )
     ->setFormatter( Format::datetime( "H:i", "H:i:s" ) ),
-Field::inst( "date" )
-    ->validator( Validate::dateFormat( "D, j M y" ) )
-    ->getFormatter( Format::dateSqlToFormat( "D, j M y" ) )
-    ->setFormatter( Format::dateFormatToSql( "D, j M y" ) )
+
 )
 ->process( $_POST )
 ->json();
