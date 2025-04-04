@@ -63,12 +63,6 @@ function generateCode() {
 &lt;link rel="stylesheet" type="text/css" href="css/generator-base.css"&gt;
 &lt;link rel="stylesheet" type="text/css" href="css/editor.dataTables.min.css"&gt;
 
-&lt;script type="text/javascript" charset="utf-8" src="https://cdn.datatables.net/v/dt/jqc-1.12.4/moment-2.29.4/dt-2.2.2/b-3.2.2/date-1.5.5/sl-3.0.0/datatables.min.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" charset="utf-8" src="js/dataTables.editor.min.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" charset="utf-8" src="js/table.2.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body class="dataTables"&gt;
-&lt;div class="container"&gt;
 
     &lt;h1&gt;
         DataTables Editor &lt;span&gt;${tableName}&lt;/span&gt;
