@@ -14,7 +14,7 @@ function addField() {
             <option>Date</option>
             <option>Time</option>
             <option>DateTime</option>
-            <option>Read only</option>
+         
             <option>Hidden</option>
         </select> 
         <button onclick="removeField(this)">Remove</button>`;
@@ -159,25 +159,7 @@ Field::inst( "time" )
     };
 }
 
-function viewCodeInNewPage(type) {
-let code = window.generatedCode[type] || "No code generated.";
 
-if (type === "PHP") {
-// Chuyển đổi ký tự đặc biệt để hiển thị chính xác trên HTML
-code = code
-    .replace(/&/g, "&amp;")  // Chuyển đổi &
-    .replace(/</g, "&lt;")   // Chuyển đổi <
-    .replace(/>/g, "&gt;")   // Chuyển đổi >
-    .replace(/"/g, "&quot;") // Chuyển đổi dấu "
-    .replace(/'/g, "&#039;") // Chuyển đổi dấu '
-    .replace(/\\/g, "&#92;");// Chuyển đổi dấu \
-
-}
-
-let newWindow = window.open();
-newWindow.document.write("<pre>" + code + "</pre>");
-newWindow.document.title = type + " Code";
-}
 
 
 generateCode();
