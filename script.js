@@ -183,10 +183,7 @@ code = code
 
 }
 
-let newWindow = window.open();
-newWindow.document.write("<pre>" + code + "</pre>");
-newWindow.document.title = type + " Code";
-}
+
 
 
 generateCode();
