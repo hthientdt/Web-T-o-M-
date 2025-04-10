@@ -128,15 +128,7 @@ select: true
 
 include( "lib/DataTables.php" );
 
-use
-DataTables\ Editor,
-DataTables\ Editor\ Field,
-DataTables\ Editor\ Format,
-DataTables\Editor\Mjoin,
-DataTables\Editor\Options,
-DataTables\Editor\Upload,
-DataTables\Editor\Validate,
-DataTables\Editor\ValidateOptions;
+
 
 $tableName = $_GET["tableName"] ?? "default_table";
 $primaryKey = "id";
@@ -150,15 +142,8 @@ Editor::inst( $db, $tableName, $primaryKey )
 ->fields(
 ${fieldNames.map(name => `Field::inst('${name}''),`).join('\n')}
 
-Field::inst( "time" )
-    ->validator( Validate::dateFormat( "H:i" ) )
-    ->getFormatter( Format::datetime( "H:i:s", "H:i" ) )
-    ->setFormatter( Format::datetime( "H:i", "H:i:s" ) ),
-Field::inst( "date" )
-    ->validator( Validate::dateFormat( "D, j M y" ) )
-    ->getFormatter( Format::dateSqlToFormat( "D, j M y" ) )
-    ->setFormatter( Format::dateFormatToSql( "D, j M y" ) )
-)
+
+
 ->process( $_POST )
 ->json();
 ') . "</pre>";
