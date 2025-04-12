@@ -1,7 +1,10 @@
 function addField() {
-    let fieldsDiv = document.getElementById('fields');
-    let fieldCount = fieldsDiv.children.length + 1;
-    let newField = document.createElement('div');
+    let fieldsDiv = document.getElementById('fields'); // Lấy div chứa tất cả các trường
+    let fieldCount = fieldsDiv.children.length + 1; // Đếm số trường hiện tại
+    let newField = document.createElement('div'); // Tạo thẻ div mới cho mỗi trường
+
+
+    // Gán nội dung HTML (input + select + nút remove)
     newField.innerHTML = `Field ${fieldCount}: <input type="text" oninput="generateCode()"> 
         <select onchange="generateCode()">
             <option>Text</option>
@@ -18,6 +21,8 @@ function addField() {
             <option>Hidden</option>
         </select> 
         <button onclick="removeField(this)">Remove</button>`;
+
+        
     fieldsDiv.appendChild(newField);
     generateCode();
 }
@@ -26,29 +31,42 @@ function removeField(button) {
     button.parentElement.remove();
     generateCode();
 }
-
+// Lấy tên bảng và khóa chính từ input người dùng
 function generateCode() {
-    let tableName = document.getElementById('tableName').value;
-    let primaryKey = document.getElementById('primaryKey').value;
+    let tableName = document.getElementById('tableName').value.trim();
+    let primaryKey = document.getElementById('primaryKey').value.trim();
+
+    // Lấy tất cả các trường nhập liệu trong #fields
     let fields = document.querySelectorAll('#fields div');
-    let fieldDefs = [];
-    let fieldNames = [];
+    let fieldDefs = []; // Dùng cho SQL + JS
+    let fieldNames = []; // Dùng cho HTML table header + PHP
     
+    // Duyệt qua từng trường
     fields.forEach((field, index) => {
-        let fieldName = field.querySelector('input').value;
+        let fieldName = field.querySelector('input').value; 
         let fieldType = field.querySelector('select').value;
         let sqlType = 'varchar(255)';
         
+         // Mapping kiểu dữ liệu
         if (fieldType === 'Number') sqlType = 'INT';
         else if (fieldType === 'Date') sqlType = 'DATE';
         else if (fieldType === 'DateTime') sqlType = 'DATETIME';
         else if (fieldType === 'Time') sqlType = 'TIME';
        
         
-        fieldDefs.push(`${fieldName} ${sqlType}`);
-        fieldNames.push(`${fieldName}`);
+        fieldDefs.push(`${fieldName} ${sqlType}`); // SQL + JS
+        fieldNames.push(`${fieldName}`); // HTML + PHP
     });
-    
+    // // Lưu dữ liệu vào localStorage 
+    localStorage.setItem('formBuilderData', JSON.stringify({
+        tableName: tableName,
+        primaryKey: primaryKey,
+        fields: Array.from(fields).map(field => ({
+            name: field.querySelector('input').value,
+            type: field.querySelector('select').value
+        }))
+    }));
+     // Gán kết quả vào biến toàn cục window.generatedCode
     window.generatedCode = {
           'SQL': `-- \n-- Editor SQL for DB table ${tableName}\n-- Created by http://editor.datatables.net/generator\n-- \n\nCREATE TABLE IF NOT EXISTS \`${tableName}\` (\n\t\`${primaryKey}\` int(10) NOT NULL auto_increment,\n${fieldDefs.join(',\n')},\n\tPRIMARY KEY( \`${primaryKey}\` )\n);`,
         
@@ -128,7 +146,15 @@ select: true
 
 include( "lib/DataTables.php" );
 
-
+use
+DataTables\ Editor,
+DataTables\ Editor\ Field,
+DataTables\ Editor\ Format,
+DataTables\Editor\Mjoin,
+DataTables\Editor\Options,
+DataTables\Editor\Upload,
+DataTables\Editor\Validate,
+DataTables\Editor\ValidateOptions;
 
 $tableName = $_GET["tableName"] ?? "default_table";
 $primaryKey = "id";
@@ -140,10 +166,17 @@ PRIMARY KEY( \`${primaryKey}\` )
 
 Editor::inst( $db, $tableName, $primaryKey )
 ->fields(
-${fieldNames.map(name => `Field::inst('${name}''),`).join('\n')}
+${fieldNames.map(name => `Field::inst('${name}'),`).join('\n')}
 
-
-
+Field::inst( "time" )
+    ->validator( Validate::dateFormat( "H:i" ) )
+    ->getFormatter( Format::datetime( "H:i:s", "H:i" ) )
+    ->setFormatter( Format::datetime( "H:i", "H:i:s" ) ),
+Field::inst( "date" )
+    ->validator( Validate::dateFormat( "D, j M y" ) )
+    ->getFormatter( Format::dateSqlToFormat( "D, j M y" ) )
+    ->setFormatter( Format::dateFormatToSql( "D, j M y" ) )
+)
 ->process( $_POST )
 ->json();
 ') . "</pre>";
@@ -152,7 +185,7 @@ ${fieldNames.map(name => `Field::inst('${name}''),`).join('\n')}
 
     };
 }
-
+// Nếu là PHP thì mã hóa các ký tự đặc biệt để hiển thị đúng
 function viewCodeInNewPage(type) {
 let code = window.generatedCode[type] || "No code generated.";
 
@@ -167,8 +200,13 @@ code = code
     .replace(/\\/g, "&#92;");// Chuyển đổi dấu \
 
 }
-
+// Mở cửa sổ mới, hiển thị mã code tương ứng
+let newWindow = window.open();
+newWindow.document.write("<pre>" + code + "</pre>");
+newWindow.document.title = type + " Code";
+}
 
 
 
 generateCode();
+
