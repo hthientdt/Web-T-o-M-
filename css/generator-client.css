@@ -1,0 +1,274 @@
+#fields div.field {
+  background-color: white;
+  min-height: 50px;
+  box-sizing: border-box;
+}
+#fields div.ui-sortable-helper {
+  opacity: 0.7;
+}
+
+div.fields input,
+div.fields select {
+  width: 100%;
+}
+div.fields select {
+  margin-top: 6px !important;
+}
+div.fields label span.field-move {
+  display: inline-block;
+  padding: 0.3em 0.7em;
+  margin-right: 0.5em;
+  border: 1px solid #ccc;
+  color: #444;
+  border-radius: 3px;
+}
+div.fields label span.field-move:hover {
+  border: 1px solid #777;
+  background: #f9f9f9;
+}
+div.fields div.field-title {
+  width: 30%;
+  float: left;
+  padding-right: 3%;
+  box-sizing: border-box;
+}
+div.fields div.field-type {
+  width: 30%;
+  float: left;
+  padding-right: 3%;
+  box-sizing: border-box;
+}
+div.fields div.field-type-options {
+  width: 30%;
+  float: left;
+  padding-right: 3%;
+  box-sizing: border-box;
+}
+div.fields div.field-remove {
+  width: 10%;
+  float: left;
+  color: #bb2525;
+  font-size: 0.9em;
+  cursor: pointer;
+  padding-top: 5px;
+}
+div.fields div.field-remove:hover {
+  text-decoration: underline;
+}
+div.fields div.field-details {
+  clear: both;
+  color: #bb2525;
+  font-size: 0.9em;
+  cursor: pointer;
+  margin-bottom: 0.5em;
+}
+div.fields div.field-details:hover {
+  text-decoration: underline;
+}
+
+#field-add {
+  clear: both;
+  text-align: center;
+  padding: 0.5em;
+  margin-top: 1em;
+  margin-left: 30%;
+  border: 1px solid #ccc;
+  background: #f3f3f3;
+  border-radius: 3px;
+  cursor: pointer;
+}
+#field-add:hover {
+  border: 1px solid #999;
+  background: #eee;
+}
+
+form select {
+  margin: 0 !important;
+}
+
+h3 {
+  margin-top: 2em;
+}
+
+#generator input[type=text] {
+  width: 110px;
+}
+
+#generator .small {
+  font-size: 0.8em;
+}
+
+#generator select,
+#generator input[type=checkbox],
+#generator img {
+  margin: 8px 0 0 0 !important;
+}
+
+#generator .include {
+  text-align: center;
+}
+
+button.btn-small {
+  padding: 0.5em 1.5em;
+  font-size: 13px;
+  text-shadow: none;
+}
+
+#download-config-background {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.7);
+  background: -ms-radial-gradient(center, ellipse farthest-corner, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+  background: -moz-radial-gradient(center, ellipse farthest-corner, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+  background: -o-radial-gradient(center, ellipse farthest-corner, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+  background: -webkit-gradient(radial, center center, 0, center center, 497, color-stop(0, rgba(0, 0, 0, 0.3)), color-stop(1, rgba(0, 0, 0, 0.7)));
+  background: -webkit-radial-gradient(center, ellipse farthest-corner, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+  background: radial-gradient(ellipse farthest-corner at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+#download-config {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 70vw;
+  height: 80vh;
+  margin-top: -40vh;
+  margin-left: -35vw;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 4px;
+  z-index: 11;
+}
+
+#download-config div.download-scroller {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 1em;
+  box-sizing: border-box;
+}
+
+#download-config div.download-close {
+  position: absolute;
+  top: -11px;
+  right: -11px;
+  width: 22px;
+  height: 22px;
+  border: 2px solid white;
+  background-color: black;
+  text-align: center;
+  border-radius: 15px;
+  cursor: pointer;
+  z-index: 12;
+  box-shadow: 2px 2px 6px #111;
+  color: white;
+}
+
+#download-config h3:first-child {
+  margin-top: 0.2em;
+}
+
+div.DTE_Field.DTE_Field_Type_title label {
+  width: 100% !important;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-bottom: 1px solid #aaa;
+}
+div.DTE_Field.DTE_Field_Type_title div {
+  display: none;
+}
+div.DTE_Field.DTE_Field_Type_title:hover {
+  background-color: white;
+  border: 1px solid transparent;
+}
+
+div.DTE_Field div.DTE_Field_Info {
+  padding-top: 2px;
+}
+
+div.values-multi-info {
+  position: absolute;
+  padding: 1em;
+  border: #ddd;
+  width: 200px;
+  box-shadow: 2px 2px 10px #aaa;
+  background-color: #f9f9f9;
+  font-size: 0.8em;
+  border-radius: 3px;
+}
+div.values-multi-info:before {
+  display: block;
+  position: absolute;
+  content: " ";
+  height: 10px;
+  width: 10px;
+  top: -6px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  border-left: none;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+html.dark #fields div.field {
+  background-color: transparent;
+}
+html.dark div.fields label span.field-move {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+}
+html.dark div.fields label span.field-move:hover {
+  border: 1px solid #777;
+  background: #666666;
+}
+html.dark div.fields div.field-remove {
+  color: #e4645e;
+}
+html.dark div.fields div.field-details {
+  color: #e4645e;
+}
+html.dark #field-add {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #343637;
+}
+html.dark #field-add:hover {
+  background: #4a4c4d;
+}
+html.dark #download-config {
+  background-color: rgb(33, 37, 41);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+}
+html.dark #download-config div.download-close {
+  border: 2px solid white;
+  background-color: black;
+  box-shadow: 2px 2px 6px #111;
+  color: white;
+}
+html.dark div.DTE_Field.DTE_Field_Type_title label {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+html.dark div.DTE_Field.DTE_Field_Type_title:hover {
+  background-color: transparent;
+}
+html.dark div.values-multi-info {
+  border: rgba(255, 255, 255, 0.15);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  background-color: rgb(33, 37, 41);
+}
+html.dark div.values-multi-info:before {
+  background-color: rgb(33, 37, 41);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
