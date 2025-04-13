@@ -43,8 +43,8 @@ function generateCode() {
     
     // Duyệt qua từng trường
     fields.forEach((field, index) => {
-        let fieldName = field.querySelector('input').value; 
-        let fieldType = field.querySelector('select').value;
+        let fieldName = field.querySelector('input').value.trim(); 
+        let fieldType = field.querySelector('select').value.trim();
         let sqlType = 'varchar(255)';
         
          // Mapping kiểu dữ liệu
@@ -53,8 +53,8 @@ function generateCode() {
         else if (fieldType === 'DateTime') sqlType = 'DATETIME';
         else if (fieldType === 'Time') sqlType = 'TIME';
        
-        
-        fieldDefs.push(`${fieldName} ${sqlType}`); // SQL + JS
+        //fieldDefsPHP.push(`\`${fieldName}\` ${sqlType}`); // SQL + JS
+        fieldDefs.push(`\`${fieldName}\` ${sqlType}`); // SQL + JS
         fieldNames.push(`${fieldName}`); // HTML + PHP
     });
     // // Lưu dữ liệu vào localStorage 
@@ -68,8 +68,9 @@ function generateCode() {
     }));
      // Gán kết quả vào biến toàn cục window.generatedCode
     window.generatedCode = {
+        //----------------------------- Xuất code SQL-------------------------
           'SQL': `-- \n-- Editor SQL for DB table ${tableName}\n-- Created by http://editor.datatables.net/generator\n-- \n\nCREATE TABLE IF NOT EXISTS \`${tableName}\` (\n\t\`${primaryKey}\` int(10) NOT NULL auto_increment,\n${fieldDefs.join(',\n')},\n\tPRIMARY KEY( \`${primaryKey}\` )\n);`,
-        
+//---------------------------------xuất code HTML------------------------
         'HTML': `&lt;!doctype html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -105,7 +106,7 @@ function generateCode() {
 &lt;/body&gt;
 &lt;/html&gt;`,
 
-
+//---------------------------------xuất code JS------------------------
       'Javascript': `/*
 * Editor client script for DB table ${tableName}
 * Created by http://editor.datatables.net/generator
@@ -115,14 +116,13 @@ addEventListener("DOMContentLoaded", function () {
 var editor = new DataTable.Editor({
 ajax: 'php/table.${tableName}.php',
 table: '#${tableName}',
-fields: ${JSON.stringify(fieldDefs, null, 4)}
+fields: [\n${fieldNames.map(name =>`{\n\t"lable":"${name.trim()}:",\n\t"name":${name.trim()}\n},`).join('\n')}\n]
 });
 
 var table = new DataTable('#${tableName}', {
 ajax: 'php/table.${tableName}.php',
-columns: [
-    ${fieldDefs.join(",\n")}
-],
+columns: [\n${fieldNames.map(name =>`{\n\t"data":"${name.trim()}"},`).join('\n')}\n],
+
 layout: {
     topStart: {
         buttons: [
@@ -135,6 +135,7 @@ layout: {
 select: true
 });
 });`,
+//---------------------------------xuất code PHP------------------------
        
        'PHP': `
 <?php
@@ -147,40 +148,29 @@ select: true
 include( "lib/DataTables.php" );
 
 use
-DataTables\ Editor,
-DataTables\ Editor\ Field,
-DataTables\ Editor\ Format,
-DataTables\Editor\Mjoin,
-DataTables\Editor\Options,
-DataTables\Editor\Upload,
-DataTables\Editor\Validate,
-DataTables\Editor\ValidateOptions;
+DataTables\\Editor,
+DataTables\\Editor\\Field,
+DataTables\\Editor\\Format,
+DataTables\\Editor\\Mjoin,
+DataTables\\Editor\\Options,
+DataTables\\Editor\\Upload,
+DataTables\\Editor\\Validate,
+DataTables\\Editor\\ValidateOptions;
 
-$tableName = $_GET["tableName"] ?? "default_table";
-$primaryKey = "id";
 
-$db->sql( "CREATE TABLE IF NOT EXISTS $tableName (
+$db->sql( "CREATE TABLE IF NOT EXISTS ${tableName} (
+\`${primaryKey}\` int(10) NOT NULL auto_increment,
 ${fieldDefs.join(",\n")}
-PRIMARY KEY( \`${primaryKey}\` )
+PRIMARY KEY(\`${primaryKey}\`)
 );" );
 
-Editor::inst( $db, $tableName, $primaryKey )
+Editor::inst( $db, '${tableName}', '${primaryKey}' )
 ->fields(
-${fieldNames.map(name => `Field::inst('${name}'),`).join('\n')}
+${fieldNames.map(name =>`Field::inst('${name.trim()}'),`).join('\n')}
 
-Field::inst( "time" )
-    ->validator( Validate::dateFormat( "H:i" ) )
-    ->getFormatter( Format::datetime( "H:i:s", "H:i" ) )
-    ->setFormatter( Format::datetime( "H:i", "H:i:s" ) ),
-Field::inst( "date" )
-    ->validator( Validate::dateFormat( "D, j M y" ) )
-    ->getFormatter( Format::dateSqlToFormat( "D, j M y" ) )
-    ->setFormatter( Format::dateFormatToSql( "D, j M y" ) )
 )
 ->process( $_POST )
 ->json();
-') . "</pre>";
-?>
 `
 
     };
