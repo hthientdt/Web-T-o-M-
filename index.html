@@ -17,7 +17,10 @@
 			padding: 1em 1.5em !important;
 			margin-top: 0;
 		}
-	
+		div.fw-background {
+    background: #30c858;
+    background: linear-gradient(to right, #30c851, #2e9244);
+}
 		</style>
 		<link rel="stylesheet" href="styles.css">
 		
@@ -26,37 +29,25 @@
 		<a name="top" href="generator.html"></a>
 
 		<div class="fw-background">
-			<div>
-				<span></span>
-				<span></span>
-				<span></span>
-				<span></span>
-				<span></span>
-				<span></span>
-				<span></span>
+			
+			<div style="text-align: center; padding: 2em 0;">
+				<h1 class="page_title" style="font-size: 3em; margin-bottom: 0.2em;">Đồ Án</h1>
+				<div style="color: white; font-size: 2em; font-weight: bold;">Web chuyển đổi code</div>
+		
+									
+				
 			</div>
 		</div>
 
 		<div class="fw-container">
 			<div class="fw-header">
-				<div class="nav-wrapper">
-					
-
+				<div class="nav-wrapper">					
 					<div class="nav-search">
-						<div class="nav-item i-manual">
-							<a href="manual.html">Manual</a>
-						</div>
-						<div class="nav-item i-download">
-							<a href="download.html">Download</a>
-						</div>
+						
 						<div class="nav-item i-user">
 							<div class="account"></div>
 						</div>
-						<div class="nav-item search">
-							<form action="/q/" method="GET">
-								<input type="text" name="q" placeholder="Search . . ." autocomplete="off">
-							</form>
-						</div>
+						
 						<div class="nav-item dt-demo-options"></div>
 					</div>
 				</div>
@@ -80,16 +71,7 @@
 			</div>
 
 			<div class="fw-body">
-				<div class="content">
-					
-					<h1 class="page_title">Generator</h1>
-
-					
-					<p>Generator for Editor provides a quick and easy method to construct everything you need to use Editor on your own site. Generator will build a customised package for you that you can upload to your server and start using Editor almost immediately with a minimum of configuration. You can also build an editable table online to test out your configuration.</p>
-
-<p>Note that Generator is not designed to present all of the options that are available in Editor - it is a quick start tool only! To get the most out of Editor working with the <a href="api.html">API</a> and <a href="options.html">initialisation options</a> is required.</p>
-
-<div>
+				
     <form id="generator_form"  method="POST" class="layout">
         <input id="column_count" type="hidden" name="columns">
         <input id="action" type="hidden" name="action" value="">
@@ -110,12 +92,10 @@
             <div class="clear"></div>
         </div>
 
-        <h3>Form / table</h3>
-
         <div class="section">
 			<h3>Form / Table</h3>
 			<div id="fields">
-				<div>Field 1: <input type="text" value="t" oninput="generateCode()"> 
+				<div>Field 1: <input type="text" value=" " oninput="generateCode()"> 
 					<select onchange="generateCode()">
 						<option>Text</option>
 						<option>Number</option>
@@ -130,7 +110,7 @@
 						<option>Read only</option>
 						<option>Hidden</option>
 					</select> 
-					<button class="site-btn btn-inline small" type="button" onclick="removeField(this)">Remove</button>
+					<button  type="button" onclick="removeField(this)">Remove</button>
 				</div>
 			</div>
 			<button class="site-btn btn-inline small" type="button" onclick="addField()">Add Field</button>
